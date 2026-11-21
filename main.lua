@@ -8,6 +8,9 @@ local individualUnmutes = PersistentDB:GetStructuredData("individualUnmutes") or
 local blacklist = {}
 local soundsByGroup = {}
 
+local audioIcon = id.Sprites.RS3_AUDIO_OPTION_ICONS_1
+local audioIconSelected = id.Sprites.RS3_AUDIO_OPTION_ICONS_9
+
 -- Initialise the list of sounds belonging to each group
 --    We don't keep track of individual sounds muted for each group since otherwise
 --    the table is too big for PersistentDB to handle
@@ -78,16 +81,16 @@ end
 
 -- Reusable function for the Mute icon
 local function addMuteSprite(tab, tooltip, columnGap)
-	local sprite = tab:AddSprite(19766, {
+	local sprite = tab:AddSprite(audioIcon, {
 		size = 24,
 		tooltip = tooltip,
 		columnGap = columnGap
 	})
 	sprite.root:Subscribe(ui.Hook.ONMOUSEOVER, function(button)
-		button.sprite = 19774
+		button.sprite = audioIconSelected
 	end)
 	sprite.root:Subscribe(ui.Hook.ONMOUSELEAVE, function(button)
-		button.sprite = 19766
+		button.sprite = audioIcon
 	end)
 	return sprite
 end
